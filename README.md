@@ -1,4 +1,7 @@
 # pth
+
+[![Build Status](https://travis-ci.org/analyticbastard/pth.svg?branch=master)](https://travis-ci.org/analyticbastard/pth)
+
 Parallel thread flows in clojure, a couple of macros that evaluate the given expressions on an input and produce a list of results
 
 ## Usage
