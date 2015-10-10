@@ -4,8 +4,28 @@
 
 Parallel thread flows in clojure, a couple of macros that evaluate the given expressions on an input and produce a list of results
 
+It is especially designed to cope with the case when more than one evaluation of the previous value is required in a Clojure thread flow,
+and the syntax is cleaner than ``as->`` since the passed values are hidden. The form following the parallel thread flow must
+know the layout of the vector in order to process it, of course.
+
+
+## Installation
+
+Add this to your ```project.clj```
+
+```clojure
+[analyticbastard/pth "0.0.1-SNAPSHOT"]
+```
+
 ## Usage
 
+Require the library's main namespace from your namespace:
+
+```clojure
+(:require pth)
+```
+
+Then use it:
 
 ```clojure
 (-<< [1 2 3]
