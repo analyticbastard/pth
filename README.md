@@ -14,7 +14,7 @@ know the layout of the vector in order to process it, of course.
 Add this to your ```project.clj```
 
 ```clojure
-[analyticbastard/pth "0.0.1-SNAPSHOT"]
+[analyticbastard/pth "0.1.0-SNAPSHOT"]
 ```
 
 ## Usage
