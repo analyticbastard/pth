@@ -11,13 +11,16 @@
         (recur (conj prev current) (next forms)))
       prev)))
 
-(defmacro -<< [x & forms]
-  (loop [prev (if-not forms [x] [])
-         forms forms]
-    (if forms
-      (let [form (first forms)
-            current (if (seq? form)
-                      (with-meta `(~(first form) ~@(next form) ~x) (meta form))
-                      (list form x))]
-        (recur (conj prev current) (next forms)))
-      prev)))
+(defmacro -<< [& forms]
+  (let [placeholder (second forms)
+        [x forms] (if (= :_ placeholder) [(first forms) (-> forms rest rest)]
+                                         [(last forms) (butlast forms)])]
+    (loop [prev (if-not forms [x] [])
+           forms forms]
+      (if forms
+        (let [form (first forms)
+              current (if (seq? form)
+                        (with-meta `(~(first form) ~@(next form) ~x) (meta form))
+                        (list form x))]
+          (recur (conj prev current) (next forms)))
+        prev))))
