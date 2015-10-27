@@ -25,10 +25,11 @@
           my-map1 {:1 1, :2 2, :3 3}
           my-map2 {:1 5, :2 6, :3 7}]
       (is (= (-> input-value
+                 first
                  (-< identity
                      my-map1
                      my-map2))
-             [input-value (my-map1 input-value) (my-map2 input-value)])))))
+             [(first input-value) (-> input-value first my-map1) (-> input-value first my-map2)])))))
 
 (deftest test-pre-thread-inside-flow-placeholder
   (testing "Testing pre-par-flow inside Clojure flow with placeholder"
@@ -36,11 +37,12 @@
           my-map1 {:1 1, :2 2, :3 3}
           my-map2 {:1 5, :2 6, :3 7}]
       (is (= (->> input-value
+                  first
                   (-< identity
                       my-map1
                       my-map2
                       :_))
-             [input-value (my-map1 input-value) (my-map2 input-value)])))))
+             [(first input-value) (-> input-value first my-map1) (-> input-value first my-map2)])))))
 
 (deftest test-post-thread
   (testing "Testing evaluation with no forms"
