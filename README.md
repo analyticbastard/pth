@@ -77,6 +77,25 @@ In the same way, ```-<``` can accept a placeholder in its last position, signali
 => 2
 ```
 
+In a slightly more advanced example, we could create a new map of list of values in the two specified maps,
+but performing some processing for the elements in the first map
+
+``` clojure
+(let [input-value [:1 :2]
+      my-map1 {:1 1, :2 2, :3 3}
+      my-map2 {:1 5, :2 6, :3 7}]
+  (->> input-value
+       (map #(-> %
+                 (-< identity
+                     (-> my-map1 dec)
+                     my-map2)
+                 (-< first
+                     rest)
+                 (-<< :_ (apply hash-map))))
+       (apply concat)
+       (apply merge)))
+=> {:1 (0 5), :2 (1 6)}
+```
 
 ## Installation
 
